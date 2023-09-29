@@ -28,7 +28,7 @@ class MyDateTest(unittest.TestCase):
     #
 
     def test_days_elapsed1(self):
-        self.assertEqual(1, my_date.days_elapsed(1997, 1, 1, 1997, 2, 1))
+        self.assertEqual(1, my_date.days_elapsed(1997, 1, 1, 1997, 1, 2))
 
     def test_days_elapsed2(self):
         self.assertEqual(31, my_date.days_elapsed(1997, 1, 1, 1997, 2, 1))
@@ -50,4 +50,4 @@ class MyDateTest(unittest.TestCase):
     # to_str
     #
     def test_to_str1(self):
-        self.assertEqual("Wednesday, 02 August 2024", my_date.to_str(2024, 8, 2))
+        self.assertEqual("Friday, 02 August 2024", my_date.to_str(2024, 8, 2))
