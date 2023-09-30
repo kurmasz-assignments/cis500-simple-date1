@@ -1,40 +1,45 @@
 #######################################################
 # my_date
 #
-# Name: zzNAMEzz (replace with your name)
-# Section: XX
+# Name: Bhavya Sri Pallapu
+# Section: 03
 #
 # Fall 2023
 #########################################################
 
+DAYS_OF_WEEK = ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
 
 def is_leap_year(year: int) -> bool:
-    """Return True if year is a leap year, False otherwise"""
+    isLeapYear = (year % 4 == 0 and (year % 100 != 0 or year % 400 == 0))
+    return isLeapYear
     pass
  
-def ordinal_date(year:int , month: int, day: int) -> int:
-    """ Return the number of days elapsed since the beginning of the year, including any partial days.
-        For example, the ordinal date for 1 January is 1.
-        Hint: pre-compute the ordinal date for the first of each month."""
+def ordinal_date(year: int , month: int, day: int) -> int:
+    daysInMonth = [0, 31, 28 + is_leap_year(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+    return sum(daysInMonth[:month]) + day
     pass
-
+    
 def days_elapsed(year1: int, month1: int, day1: int, year2: int, month2: int, day2:int ) -> int:
-    """ Return the number of days that have elapsed between year1-month1-day1 and year2-month2-day2.
-        You may assume that year1-month1-day1 falls on or before year2-month2-day2. (In other words,
-        your answer will always be >= 0.) """
+    startDate = ordinal_date(year1, month1, day1)
+    endDate = ordinal_date(year2, month2, day2)
+    return endDate - startDate
     pass
-
+    
 # This is a tuple. It is immutable so that users can't accidentally modify it.
 DAYS_OF_WEEK = ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday')
 
+
 def day_of_week(year: int, month: int, day: int) -> str:
-    """ Return the day of the week (Sunday, Monday, Tuesday, etc.) for the given day
-        Hint 1: 1 January 1753 was a Monday.
-        Hint 2: Use the methods you've already written."""
+    daysElapsed = ordinal_date(year, month, day) - ordinal_date(1753, 1, 1)
+    dayIndex = (daysElapsed % 7 + 1) % 7  
+    return DAYS_OF_WEEK[dayIndex]
     pass
     
 def to_str(year: int, month: int, day: int) -> str:
-    """ Return this date as string of the form "Wednesday, 07 March 1833"."""
+    months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+    dayName = day_of_week(year, month, day)
+    formattedDate = f"{dayName}, {day:02d} {months[month - 1]} {year}"
+    return formattedDate
     pass
               
     
